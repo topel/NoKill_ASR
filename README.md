@@ -50,4 +50,16 @@ python3 ASR_synchronous.py <file_name> <out_path> <transcription_name>
 
 Le script python de la transcription d'un fichier wav permet l'enregistrement d'un fichier au format texte contenant la transcription
 
+## Modèle IRIT
+
+### Génération du corpus d'apprentissage du modèle de langage
+La génération du corpus d'apprentissage du modèle de langage selon le schéma suivant :
+
+<div style="text-align:center">
+  <img src="images/Schema_principe_crawler.png" width="300" >
+</div>
+
+Un explorateur web va récupérer des pages wikipedia a partir de pages "racine" définies par l'utilisateur. Ces pages "racine" permettent d'orienter la recherche de textes vers des thèmes précis en fonction du contexte de la reconaissance de la parole. Cet explorateur récupère environs 200 pages par page "racine".
+
+ATTENTION : La récupération des pages peut être très longue, il est recommandé de ne l'effectuer qu'une seule fois.
 
