@@ -28,3 +28,22 @@ Python 2 est utilisé pour la génération du corpus, l'entrainement du modèle 
 #### Système
 Afin d'entraîner le modèle de langage, il va falloir installer dans un premier temps Kaldi (https://github.com/kaldi-asr/kaldi)
 Puis insaller SRILM dans Kaldi. Pour ce faire Télecharger SRILM renomer l,archiive télechargée srilm.tgz et la placer dans le fichier kaldi/tools/ . Enfin, executer le scipt kaldi/tools/install_srilm.sh
+
+## API Google Speech to Text
+
+Avant de lancer les scripts de transcriptions utilisant l'API Google, il est nécessaire de créer un fichier JSON permettant de s'identifier auprès de Google (https://cloud.google.com/video-intelligence/docs/common/auth?hl=fr). Dans les scripts il est nécessaire de modifier la ligne suivante en précisant le chemin vers le fichier JSON téléchargé depuis Google Cloud :
+```
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="<your_key>.json"
+```
+
+Une fois le chemin vers le fichier JSON établi, il suffit de lancer les scripts de la manière suivante pour une transcription en streamming :
+```
+python3 ASR_Google_stream.py
+```
+
+ou de cette façon pour une transcription a partir d'un fichier wav :
+```
+python3 ASR_synchronous.py <file_name> <out_path> <transcription_name>
+```
+
+Le script python de la transcription d'un fichier wav permet l'enregistrement d'un fichier au format texte contenant la transcription
