@@ -63,3 +63,6 @@ Un explorateur web va récupérer des pages wikipedia a partir de pages "racine"
 
 ATTENTION : La récupération des pages peut être très longue, il est recommandé de ne l'effectuer qu'une seule fois.
 
+Les pages Wikipédia récupérées sont ensuite associés avec des corpus existants (Commonvoice, ESTERS2...) avant d'être traitées avec un analyseur afin de supprimer les caractères spéciaux, adapter les abbréviations et mettre une seule phrase par ligne.
+
+Une fois ce prétraitement terminé, le corpus traité est divisé en un ensemble d'entrainement (80% des phrases) et un ensemble  de test (20% des phrases).
