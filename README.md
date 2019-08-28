@@ -34,17 +34,17 @@ Pour effectuer la phonetisation des mots hors vocabulaires, Il est necessaire d'
 ## API Google Speech to Text
 
 Avant de lancer les scripts de transcriptions utilisant l'API Google, il est nécessaire de créer un fichier JSON permettant de s'identifier auprès de Google (https://cloud.google.com/video-intelligence/docs/common/auth?hl=fr). Dans les scripts il est nécessaire de modifier la ligne suivante en précisant le chemin vers le fichier JSON téléchargé depuis Google Cloud :
-```
+```python
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="<your_key>.json"
 ```
 
 Une fois le chemin vers le fichier JSON établi, il suffit de lancer les scripts de la manière suivante pour une transcription en streamming :
-```
+```bash
 python3 ASR_Google_stream.py
 ```
 
 ou de cette façon pour une transcription a partir d'un fichier wav :
-```
+```bash
 python3 ASR_synchronous.py <file_name> <out_path> <transcription_name>
 ```
 
@@ -66,3 +66,8 @@ ATTENTION : La récupération des pages peut être très longue, il est recomman
 Les pages Wikipédia récupérées sont ensuite associés avec des corpus existants (Commonvoice, ESTERS2...) avant d'être traitées avec un analyseur afin de supprimer les caractères spéciaux, adapter les abbréviations et mettre une seule phrase par ligne.
 
 Une fois ce prétraitement terminé, le corpus traité est divisé en un ensemble d'entrainement (80% des phrases) et un ensemble  de test (20% des phrases).
+
+### Adaptation au contexte
+
+Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus de développement (contenant les textes que l'on doit transcrire) afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
+
