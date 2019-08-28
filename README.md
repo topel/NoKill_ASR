@@ -71,3 +71,10 @@ Une fois ce prétraitement terminé, le corpus traité est divisé en un ensembl
 
 Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus de développement (contenant les textes que l'on doit transcrire) afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
 
+<div style="text-align:center">
+  <img src="images/Schema_de_principe_adaptation.png" width="700" >
+</div>
+
+Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams jusqu'au 3-gram) ensuite on va "multiplier" le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement:
+ 	
+
