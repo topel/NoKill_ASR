@@ -67,14 +67,26 @@ Les pages Wikipédia récupérées sont ensuite associés avec des corpus exista
 
 Une fois ce prétraitement terminé, le corpus traité est divisé en un ensemble d'entrainement (80% des phrases) et un ensemble  de test (20% des phrases).
 
-### Adaptation au contexte
+#### Adaptation au contexte
 
-Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus de développement (contenant les textes que l'on doit transcrire) afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
+Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus de développement (contenant un échantillon des textes que l'on doit transcrire) afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
 
 <div style="text-align:center">
   <img src="images/Schema_de_principe_adaptation.png" width="700" >
 </div>
 
-Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams jusqu'au 3-gram) ensuite on va "multiplier" le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement:
+Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams jusqu'aux 3-grams) ensuite on va "multiplier" le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement. Cela aura pour effet de diminuer la perplexité du modèle de langage.
+
+### Entrainement du modèle de langage
+
+Une fois que le corpus bien en place, on peut passer à l'entrainement du modèle de langage.  Le modèle de langage entrainé est un 3-gram. Pour cela, on utilise SRILM et la commande :
+```bash
+ngram-count -order 3 -write-vocab vocab.txt -text corpus.txt -lm lm.gz
+```
+
+Cette fonction permet d'entrainer le modèle de langage ainsi que d'enregister tous les mots du corpus d'entrainement.
+
+#### Gestion des mots hors vocabulaires
+Nous disposons de
  	
 
