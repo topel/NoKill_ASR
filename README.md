@@ -77,18 +77,21 @@ Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un co
 
 Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams jusqu'aux 3-grams) ensuite on va "multiplier" le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement. Cela aura pour effet de diminuer la perplexité du modèle de langage.
 
-### Entrainement du modèle de langage
+### Génération du graphe de reconaissance final
+
+Afin de procéder à la reconaissance de parole, il est nécessaire de génerer un graphe appelé HCLG.fst. Grossièrement, ce graphe combine le modèle de langage (représentation de la langue), le lexique ou dictionnaire et le modèle acourstique. La génération de ce graphe se fait de la manière suivante :
+
+
+
+#### Entrainement du modèle de langage
 
 Une fois que le corpus bien en place, on peut passer à l'entrainement du modèle de langage.  Le modèle de langage entrainé est un 3-gram. Pour cela, on utilise SRILM et la commande :
+
 ```bash
 ngram-count -order 3 -write-vocab vocab-full.txt -text corpus.txt -lm lm.gz
 ```
 
 Cette fonction permet d'entrainer le modèle de langage ainsi que d'enregister tous les mots du corpus d'entrainement.
-
-^^^^^^^^
-AJOUTER SCHEMA
-^^^^^^^^
 
 #### Gestion des mots hors vocabulaires
 Nous disposons d'un dictionnaire phonetique. Il se peut que certains mots du corpus d'apprentissage ne soient pas présents dans ce dernier. Il va donc falloir générer leur phonétisation. Pour ce faire, on utilise un algorithme graphème to phonème (G2P) qui permet de génerer une phonetisation des mots.
