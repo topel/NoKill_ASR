@@ -51,8 +51,8 @@ python3 ASR_synchronous.py <file_name> <out_path> <transcription_name>
 Le script python de la transcription d'un fichier wav permet l'enregistrement d'un fichier au format texte contenant la transcription
 
 ## Modèle IRIT
-
-### Génération du corpus d'apprentissage du modèle de langage
+### Foctionnement Général
+#### Génération du corpus d'apprentissage du modèle de langage
 La génération du corpus d'apprentissage du modèle de langage selon le schéma suivant :
 
 <div style="text-align:center">
@@ -67,7 +67,7 @@ Les pages Wikipédia récupérées sont ensuite associés avec des corpus exista
 
 Une fois ce prétraitement terminé, le corpus traité est divisé en un ensemble d'entrainement (80% des phrases) et un ensemble  de test (20% des phrases).
 
-#### Adaptation au contexte
+##### Adaptation au contexte
 
 Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus de développement (contenant un échantillon des textes que l'on doit transcrire) afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
 
@@ -77,14 +77,14 @@ Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un co
 
 Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams jusqu'aux 3-grams) ensuite on va "multiplier" le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement. Cela aura pour effet de diminuer la perplexité du modèle de langage.
 
-### Génération du graphe de reconaissance final
+#### Génération du graphe de reconaissance final
 
 Afin de procéder à la reconaissance de parole, il est nécessaire de génerer un graphe appelé HCLG.fst. Grossièrement, ce graphe combine le modèle de langage (représentation de la langue), le lexique ou dictionnaire et le modèle acourstique. La génération de ce graphe se fait de la manière suivante :
 
 <img src="images/schéma_HCLG_generation.png" width="700">
 
 
-#### Entrainement du modèle de langage
+##### Entrainement du modèle de langage
 
 Une fois que le corpus bien en place, on peut passer à l'entrainement du modèle de langage.  Le modèle de langage entrainé est un 3-gram. Pour cela, on utilise SRILM et la commande :
 
@@ -94,14 +94,14 @@ ngram-count -order 3 -write-vocab vocab-full.txt -text corpus.txt -lm lm.gz
 
 Cette fonction permet d'entrainer le modèle de langage ainsi que d'enregister tous les mots du corpus d'entrainement.
 
-#### Gestion des mots hors vocabulaires
+##### Gestion des mots hors vocabulaires
 Nous disposons d'un dictionnaire phonetique. Il se peut que certains mots du corpus d'apprentissage ne soient pas présents dans ce dernier. Il va donc falloir générer leur phonétisation. Pour ce faire, on utilise un algorithme graphème to phonème (G2P) qui permet de génerer une phonetisation des mots.
 
 Afin de limiter les erreurs possibles de phonetisation, un filtrage des mots hors vocabulaire est nécessaire. En effet, des mots hors vocabulaire ne sont pas des mots de la langue française et ne sont donc pas nécessaires dans notre contexte de reconaissance. De plus, ils peuvent causer une creation de phonèmes inexistants par le modèle G2P lorsque ce dernier n'arrive pas à génerer un résultat correct. Dans un premier temps, on ne va donc conserver que les mots hors vocabulaire qui sont présent dans le corpus de développement.
 
 Avant de passer à l'étape suivante, il faut s'assurer que les phonèmes générés par l'algorithme G2P soient des phonèmes présent dans le dictionnaire.
 
-#### Génération des graphes L.fst et G.fst et compilation du graphe HCLG.fst
+##### Génération des graphes L.fst et G.fst et compilation du graphe HCLG.fst
 
 Afin de générer le graphe de reconaissance final HCLG.fst, nous allons dans un premier temps générer les graphes L.fst et G.fst. Avant de génerer le graphe L.fst, il est nécessaire de préparer un fichier contenant la liste des phonèmes. Une fois ce fichier créé, il est possible de génerer le graphe en utilisant la recette Kaldi développée pour le corpus du Wall Street Journal en executant la commande suivante :
 
