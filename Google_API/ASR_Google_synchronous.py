@@ -2,10 +2,9 @@
 """
 Created on Thu Jun  6 09:48:54 2019
 @author: erwan Gateau-Magdeleine
-IRIT SAMOVA
 
 Scrip permettant la reconnaissance automatique de parole en utilisant l'API google pour des fichiers courts (<1min)
-Le fihier doit être au format .wav.
+Le fihier doit être au format .wav. La transcription est automatiquement ecrite dans un fichier texte.
 
 utilisation :
 python3 ASR_synchronous.py <file_name> <out_path> <transcription name>
