@@ -34,10 +34,6 @@ class Audiostream(object):
         # Set d'une variable pour monitorer l'activation ou non du stream audio
         self.close = True
         
-        # Creation de la VAD pour le record (sensibilité max)
-        self.VAD = webrtcvad.Vad()
-        self.VAD.set_mode(3)
-        
     def __exit__(self,type, value, traceback):
         self.stream.stop_stream()
         self.stream.close()
@@ -53,7 +49,7 @@ class Audiostream(object):
                 channels=1,
                 rate=self.sample_rate,
                 input=True,
-                output=True, #Desactive l'écoute en temps réel
+                output=True,
                 frames_per_buffer=self.chunk,
                 stream_callback=self.callback)
         self.close = False
@@ -155,7 +151,7 @@ def listen_print_loop(responses):
 ####### MAIN #######
 
 # Initialisation Google API
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=r"NoKillSpeechRecognition-d838c0d75533.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]= <LINK YOUR JSON FILE HERE>
 
 client = speech.SpeechClient()
 
@@ -172,9 +168,6 @@ streaming_config = types.StreamingRecognitionConfig(
 
 with Audiostream(RATE,CHUNK) as stre:
         audio_gen =  stre.generateur()
-
-#        for content in audio_gen:
-#            print(content)
 
         requests = (types.StreamingRecognizeRequest(audio_content=content)
                   for content in audio_gen)
