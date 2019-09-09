@@ -2,21 +2,40 @@
 
 ### Utilisation
 
-Le script Gene.sh permet de réaliser toute les opérations de création du graphe de reconaissance final.
+Le script Gene.sh permet de réaliser toute les opérations de création du graphe de reconaissance final. Ce script ne permet pas l'entraînement d'un modèle acoustique. Il faut donc être en possession d'un modèle acoustique généré avec Kaldi pour pouvoir lancer ce script.
 
 #### Etape 1
-Avant de lancer les scripts et générer un graphe de reconaissance, il faut s'assurer de placer le corpus textuel que l'on souhaite utiliser dans le dossier data/training_corpus/ et modifier le script Gene.sh a la ligne 82 afin d'associer toute les sources textuelles à utiliser.
+
+Avant de lancer le script, veiller a bien specifier les chemins d'accès au debut du script :
+* corpus_path : Chemin vers le corpus d'entraînement du modèle de langage
+* g2p : Chemin vers le modèle graphème to phonème
+* locdata : chemin vers les données locales
+* locdic : chemin vers le dossier du dictionnaire (Il doit contenir le dictionnaire fr.dict)
+* loclang : chemin vers le repertoire temporaire pour la preparation du modèle de langage
+* lang : chemin vers le repertoire pour la generation du modèle de langage
+* lang_test : chemin vers le repertoire pour le test du modèle de langage (doit etre différent de lang)
+* acoustic chemin vers le répertoire contenant le modèle acoustique
+* dev : chemin vers le fichier contenant le texte utilisé pou l'optimisation:
+
+Il faut s'assurer de placer le corpus textuel que l'on souhaite utiliser dans le dossier data/training_corpus/ et modifier le script Gene.sh a la ligne suivante afin de composer le corpus d'apprentissage du modèle de langage 
+```
+cat $corpus_path/corpus_part1.txt $corpus_path/corpus_part2.txt  > $corpus_path/CORPUS.txt
+```
 
 Si vous souhaitez générer un corpus, vous pouvez en générer un en affectant 1 a la variable wiki_crawl au début du script Gene.sh. Cela permettra de récuperer 200 pages par pages de référence listées au debut du script scripts/wikipedia-crawler/wiki-crawler.py. Attention, cette opération est très longue.
 
 #### Etape 2
-Une fois le corpus textuel a la bonne place, il faut placer le modèle acoustique (les fichiers final.mdl et tree) dans le dossier data/acoustic. Dès que c'est fait, vous pouvez lancer le script Gene.sh
+Une fois le corpus textuel a la bonne place, il faut placer le modèle acoustique généré avec Kaldi (les fichiers final.mdl et tree) dans le dossier acoustic.
 
+
+#### Etape 3
+Une fois les deux premières étapes effectuées, il est possible de lancer la génération du graphe final : 
 ```
 ./Gene.sh
 ```
-#### Etape 3
-Une fois le script executé sans erreur, il faut deplacer le contenu du dossier data/acoustic vers le dossier vers lequel est dirigé votre script de reconaissance.
+#### Etape 4
+Une fois le script executé sans erreurs d'execution, il est possible de récupérer le graphe de transcription final (HCLG.fst) dans le dossier data/acoustic/graph afin de procéder à la transcription d'audios
+
 
 ### Fonctionnement Général
 #### Génération du corpus d'apprentissage du modèle de langage
