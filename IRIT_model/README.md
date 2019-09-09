@@ -23,7 +23,7 @@ Une fois le script executé sans erreur, il faut deplacer le contenu du dossier 
 La génération du corpus d'apprentissage du modèle de langage selon le schéma suivant :
 
 <div style="text-align:center">
-  <img src="../images/Schema_principe_crawler.png" width="300" >
+  <img src="../images/Schema_principe_generation_corpus.png" width="400" >
 </div>
 
 Un explorateur web va récupérer des pages wikipedia a partir de pages "racine" définies par l'utilisateur. Ces pages "racine" permettent d'orienter la recherche de textes vers des thèmes précis en fonction du contexte de la reconaissance de la parole. Cet explorateur récupère environs 200 pages par page "racine".
@@ -39,7 +39,7 @@ Une fois ce prétraitement terminé, le corpus traité est divisé en un ensembl
 Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus de développement (contenant un échantillon des textes que l'on doit transcrire) afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
 
 <div style="text-align:center">
-  <img src="../images/Schema_de_principe_adaptation.png" width="700" >
+  <img src="../images/Schema_de_principe_adaptation.png" width="900" >
 </div>
 
 Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams jusqu'aux 3-grams) ensuite on va "multiplier" le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement. Cela aura pour effet de diminuer la perplexité du modèle de langage.
@@ -48,7 +48,7 @@ Cette étape correspond a une analyse du corpus de développement (on regarde le
 
 Afin de procéder à la reconaissance de parole, il est nécessaire de génerer un graphe appelé HCLG.fst. Grossièrement, ce graphe combine le modèle de langage (représentation de la langue), le lexique ou dictionnaire et le modèle acourstique. La génération de ce graphe se fait de la manière suivante :
 
-<img src="../images/schéma_HCLG_generation.png" width="700">
+<img src="../images/schéma_HCLG_generation(1).png" width="700">
 
 
 ##### Entrainement du modèle de langage
