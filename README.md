@@ -6,7 +6,7 @@ Deux approches ont été utilisées : la première est l'utilisation de l'API Sp
 
 Les scripts faisant appel à l'API Google permettent directement de faire de la reconaissance.
 
-Les scripts faisant appel aux modèles développés à l'IRIT permet, a partir d'un corpus d'entraîner un modèle de langage et ainsi recréer un graphe de transcription en utilisant kaldi et un modèle acoustique à fournir au modèle.
+Les scripts faisant appel aux modèles développés à l'IRIT permet, a partir d'un corpus de textes d'entraîner un modèle de langage et ainsi recréer un graphe de transcription en utilisant kaldi et un modèle acoustique à fournir au modèle.
 
 Le dossier contiens des codes python 2 et 3 permettant d'éffectuer la reconaissance mais aussi de créer un corpus dans le but d'entraîner un modèle de langage, effectuer l'entraînement de ce dernier et de génerer le graphe permettant la reconaissance
 
