@@ -3,6 +3,12 @@
 Created on Mon Jun 17 13:31:35 2019
 
 @author: erwan
+
+Scrip permettant la reconnaissance automatique de parole en utilisant l'API google de l'audio en provenance d'un microphone.
+La transcription n'est pas enregistrée dans un fichier.
+
+utilisation :
+python3 ASR_stream.py
 """
 
 
