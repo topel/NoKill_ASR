@@ -2,13 +2,28 @@
 
 ### Utilisation
 
+Le script Gene.sh permet de réaliser toute les opérations de création du graphe de reconaissance final.
 
-### Foctionnement Général
+#### Etape 1
+Avant de lancer les scripts et générer un graphe de reconaissance, il faut s'assurer de placer le corpus textuel que l'on souhaite utiliser dans le dossier data/training_corpus/ et modifier le script Gene.sh a la ligne 82 afin d'associer toute les sources textuelles à utiliser.
+
+Si vous souhaitez générer un corpus, vous pouvez en générer un en affectant 1 a la variable wiki_crawl au début du script Gene.sh. Cela permettra de récuperer 200 pages par pages de référence listées au debut du script scripts/wikipedia-crawler/wiki-crawler.py. Attention, cette opération est très longue.
+
+#### Etape 2
+Une fois le corpus textuel a la bonne place, il faut placer le modèle acoustique (les fichiers final.mdl et tree) dans le dossier data/acoustic. Dès que c'est fait, vous pouvez lancer le script Gene.sh
+
+```
+./Gene.sh
+```
+#### Etape 3
+Une fois le script executé sans erreur, il faut deplacer le contenu du dossier data/acoustic vers le dossier vers lequel est dirigé votre script de reconaissance.
+
+### Fonctionnement Général
 #### Génération du corpus d'apprentissage du modèle de langage
 La génération du corpus d'apprentissage du modèle de langage selon le schéma suivant :
 
 <div style="text-align:center">
-  <img src="images/Schema_principe_crawler.png" width="300" >
+  <img src="../images/Schema_principe_crawler.png" width="300" >
 </div>
 
 Un explorateur web va récupérer des pages wikipedia a partir de pages "racine" définies par l'utilisateur. Ces pages "racine" permettent d'orienter la recherche de textes vers des thèmes précis en fonction du contexte de la reconaissance de la parole. Cet explorateur récupère environs 200 pages par page "racine".
@@ -24,7 +39,7 @@ Une fois ce prétraitement terminé, le corpus traité est divisé en un ensembl
 Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus de développement (contenant un échantillon des textes que l'on doit transcrire) afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
 
 <div style="text-align:center">
-  <img src="images/Schema_de_principe_adaptation.png" width="700" >
+  <img src="../images/Schema_de_principe_adaptation.png" width="700" >
 </div>
 
 Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams jusqu'aux 3-grams) ensuite on va "multiplier" le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement. Cela aura pour effet de diminuer la perplexité du modèle de langage.
@@ -33,7 +48,7 @@ Cette étape correspond a une analyse du corpus de développement (on regarde le
 
 Afin de procéder à la reconaissance de parole, il est nécessaire de génerer un graphe appelé HCLG.fst. Grossièrement, ce graphe combine le modèle de langage (représentation de la langue), le lexique ou dictionnaire et le modèle acourstique. La génération de ce graphe se fait de la manière suivante :
 
-<img src="images/schéma_HCLG_generation.png" width="700">
+<img src="../images/schéma_HCLG_generation.png" width="700">
 
 
 ##### Entrainement du modèle de langage
