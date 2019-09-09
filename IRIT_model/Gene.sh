@@ -83,7 +83,7 @@ then
 
 	# Association des fichiers pour créer le corpus d'entrainement
 	echo "--- Fusion des corpus ---"	
-	cat $corpus_path/1_Textes_site_nokill.txt $corpus_path/1_ESTERS2_dev.txt $corpus_path/1_ESTERS2.txt $corpus_path/2_ESTERS2.txt $corpus_path/Traite_Commonvoice_ALL.txt $corpus_path/raw_database.txt > $corpus_path/CORPUS.txt
+	cat $corpus_path/corpus_part1.txt $corpus_path/corpus_part2.txt  > $corpus_path/CORPUS.txt
 
 	# Mise en forme du corpus pour effectuer l'apprentissage (genere un fichier database.txt contenant le corpus traité et un fichier corpuswords.txt contenant les mots présents dans ce corpus)
 	echo "--- Mise en forme du corpus d'apprentissage ---"
