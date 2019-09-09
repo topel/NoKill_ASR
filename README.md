@@ -1,7 +1,12 @@
-# NoKill_ASR
+# Trancription automatique de la parole
+
 Ce dossier contient le code necessaire pour effectuer de la reconaissance automatique de la parole. Ce dossier à été créé suite à un stage réalisé de juin à septembre 2019  à l'Institut de Recherche en Informatique de Toulouse (IRIT) dont l'objectif etais de réaliser un système de reconnaissance automatique de la parole aui serait utilisé pour une pièce de théâtre par la compagnie No Kill (http://cienokill.fr/spectacles/turing-test/).
 
 Deux approches ont été utilisées : la première est l'utilisation de l'API Speech To Text développée par Google, la seconde est l'utilisation de  modèles développés à l'IRIT.
+
+Les scripts faisant appel à l'API Google permettent directement de faire de la reconaissance.
+
+Les scripts faisant appel aux modèles développés à l'IRIT permet, a partir d'un corpus d'entraîner un modèle de langage et ainsi recréer un graphe de transcription en utilisant kaldi et un modèle acoustique à fournir au modèle.
 
 Le dossier contiens des codes python 2 et 3 permettant d'éffectuer la reconaissance mais aussi de créer un corpus dans le but d'entraîner un modèle de langage, effectuer l'entraînement de ce dernier et de génerer le graphe permettant la reconaissance
 
@@ -10,6 +15,8 @@ Le dossier contiens des codes python 2 et 3 permettant d'éffectuer la reconaiss
 Il est recommandé Ubuntu, en effet certains packages nécessaires ne sont disponibles que sur cette plateforme.
 
 ### Prérequis
+
+Cette liste peut être incomplète
 
 #### Python 3
 Python 3 n'est utilisé que pour l'utilisation de l'API Google. Afin de pouvoir utiliser les scripts présentés, il va falloir installer les packages python 3 suivants :
