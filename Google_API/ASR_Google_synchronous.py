@@ -5,7 +5,10 @@ Created on Thu Jun  6 09:48:54 2019
 IRIT SAMOVA
 
 Scrip permettant la reconnaissance automatique de parole en utilisant l'API google pour des fichiers courts (<1min)
-Le fihier doit être au format .wav Il peut être stereo, dans ce cas, il sera transformé en mono par l'algorithme
+Le fihier doit être au format .wav.
+
+utilisation :
+python3 ASR_synchronous.py <file_name> <out_path> <transcription name>
 
 """
 import os
@@ -137,7 +140,7 @@ else:
     trans_name=sys.argv[3]
 
 # Definition de la variable d'environnement GOOGLE_APPLICATION_CREDENTIALS
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pellegri/tools/ASR_DEMO_SAMOVA/Stage_Erwan/Google_API/NoKillSpeechRecognition-d838c0d75533.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=<LINK YOUR JSON HERE>
 
 # Transcription du texte en utilisant l'API GOOGLE
 transcription,confidence = transcribe_file_simple_speaker(file_name)
