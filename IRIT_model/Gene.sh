@@ -14,7 +14,7 @@ lang=data/lang
 lang_test=data/lang_test
 acoustic=data/acoustic
 
-dev=../ELEMENTS_SAMOVA_TURING_TEST/TEXTES_SAMOVA_TURING_TEST/TRAITE_TT_all.txt
+no_kill=../ELEMENTS_SAMOVA_TURING_TEST/TEXTES_SAMOVA_TURING_TEST/TRAITE_TT_all.txt
 
 
 # wiki_crawl permet de crawler le corpus wikipedia si =1 ou non si il existe deja
@@ -102,7 +102,7 @@ then
 
 	#Verification de la présence de tous les mots dans le corpus d'apprentissage et verification de leur nombre d'occurences
 	echo "--- Verification des occurences ---" 
-	python scripts/verifs_occurences.py $corpus_path/CORPUS_TRAIN.txt $dev $locdata/
+	python scripts/verifs_occurences.py $corpus_path/CORPUS_TRAIN.txt $no_kill $locdata/
 	
 	echo "--- Multiplication ---"
 	python scripts/multiplier.py $locdata/low_ngrams.txt $corpus_path/CORPUS_TRAIN.txt $corpus_path/augmented_CORPUS_TRAIN.txt
@@ -121,8 +121,8 @@ ngram-count -order 3  -write-vocab $locdata/vocab-full.txt -wbdiscount -text $co
 echo "ensemble test"
 ngram -lm $locdata/LM.gz -ppl $corpus_path/CORPUS_TEST.txt
 
-echo "ensemble dev"
-ngram -lm $locdata/LM.gz -ppl $dev
+echo "ensemble No Kill"
+ngram -lm $locdata/LM.gz -ppl $no_kill
 
 
 ############################################
