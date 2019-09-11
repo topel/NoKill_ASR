@@ -1,22 +1,21 @@
 # Trancription automatique de la parole
 
-Ce dossier contient le code necessaire pour effectuer de la reconaissance automatique de la parole. Ce dossier à été créé suite à un stage réalisé de juin à septembre 2019  à l'Institut de Recherche en Informatique de Toulouse (IRIT) dont l'objectif etais de réaliser un système de reconnaissance automatique de la parole aui serait utilisé pour une pièce de théâtre par la compagnie No Kill (http://cienokill.fr/spectacles/turing-test/).
+Ce dossier regroupe les codes écrits lors de mon stage réalisé de juin à septembre 2019  à l'Institut de Recherche en Informatique de Toulouse (IRIT) dont l'objectif etait de réaliser un système de reconnaissance automatique de la parole aui serait utilisé pour une pièce de théâtre par la compagnie No Kill (http://cienokill.fr/spectacles/turing-test/).
+Lors de ce stage, deux approches ont été développées : la première est l'utilisation de l'API Speech To Text développée par Google, la seconde est l'utilisation de  modèles développés à l'IRIT.
 
-Deux approches ont été utilisées : la première est l'utilisation de l'API Speech To Text développée par Google, la seconde est l'utilisation de  modèles développés à l'IRIT.
+Le dossier **Google_API** regroupe les scripts python permettant de porcéder a la reconaissance automatique de la parole en utilisant l'API Google. Deux scripts sont fournis : 
+* Le premier permet de faire la transcription de l'audio en streaming en utilisant comme source audio le micro de l'ordinateur 
+* Le second permet de faire la transcription d'un fichier audio au format wav
 
-Les scripts faisant appel à l'API Google permettent directement de faire de la reconaissance.
+Le dossier **IRIT_model** regroupe les scripts python, bash et perl permettant de :
+* Créer un corpus textuel basé sur du contenu Wikipédia
+* Entrainer un modèle de langage à partir de différents corpus textuels
+* Générer un graphe de transcription en utilisant kaldi
 
-Les scripts faisant appel aux modèles développés à l'IRIT permet, a partir d'un corpus de textes d'entraîner un modèle de langage et ainsi recréer un graphe de transcription en utilisant kaldi et un modèle acoustique à fournir au modèle.
 
-Le dossier contiens des codes python 2 et 3 permettant d'éffectuer la reconaissance mais aussi de créer un corpus dans le but d'entraîner un modèle de langage, effectuer l'entraînement de ce dernier et de génerer le graphe permettant la reconaissance
+## Prérequis
 
-## Avant de commencer
-
-Il est recommandé Ubuntu, en effet certains packages nécessaires ne sont disponibles que sur cette plateforme.
-
-### Prérequis
-
-Cette liste peut être incomplète
+Il est recommandé Ubuntu. La liste des installations nécessaire peut être incomplète.
 
 #### Python 3
 Python 3 n'est utilisé que pour l'utilisation de l'API Google. Afin de pouvoir utiliser les scripts présentés, il va falloir installer les packages python 3 suivants :
@@ -38,6 +37,5 @@ Puis insaller SRILM dans Kaldi. Pour ce faire Télecharger SRILM renomer l,archi
 
 Pour effectuer la phonetisation des mots hors vocabulaires, Il est necessaire d'installer Phonetisaurus (https://github.com/AdolfVonKleist/Phonetisaurus#phonetisaurus-g2p)
 
-Certains scripts sont basés sur le travail réalisé par d'autres.  Merci de regarder les entêtes des fichiers pour plus d'information.
-
-
+## Licence
+Certains scripts sont basés sur le travail réalisé par d'autres. Merci de regarder les entêtes des fichiers pour plus d'information.
