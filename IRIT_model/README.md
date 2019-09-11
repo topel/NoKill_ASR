@@ -2,11 +2,20 @@
 
 ### Utilisation
 
-Le script Gene.sh permet de réaliser toute les opérations de création du graphe de reconaissance final. Ce script ne permet pas l'entraînement d'un modèle acoustique. Il faut donc être en possession d'un modèle acoustique généré avec Kaldi pour pouvoir lancer ce script.
+Le script run.sh permet de réaliser toute les opérations nécessaires à la création du graphe de reconaissance final : de la récupération du corpus wikipédia a l'assemblage des différents graphes. Avant de lancer ce script, plusieurs étapes sont nécessaires :
 
-#### Etape 1
+#### ETAPE 1
 
-Avant de lancer le script, veiller a bien specifier les chemins d'accès au debut du script :
+changer le chemin vers kaldi dans le script path.sh
+
+```bash
+export KALDI_ROOT=<YOUR_KALDI_PATH>
+```
+
+#### ETAPE 2
+
+Spécifier les chemins d'accès vers les différents dossiers/fichiers au debut du script run.sh :
+
 * corpus_path : Chemin vers le corpus d'entraînement du modèle de langage
 * g2p : Chemin vers le modèle graphème to phonème
 * locdata : chemin vers les données locales
@@ -17,24 +26,37 @@ Avant de lancer le script, veiller a bien specifier les chemins d'accès au debu
 * acoustic chemin vers le répertoire contenant le modèle acoustique
 * no_kill : chemin vers le fichier contenant le texte utilisé pou l'optimisation:
 
-Il faut s'assurer de placer le corpus textuel que l'on souhaite utiliser dans le dossier data/training_corpus/ et modifier le script Gene.sh a la ligne suivante afin de composer le corpus d'apprentissage du modèle de langage 
-```
+#### ETAPE 3
+
+Activer ou non l'étape de crawling wikipédia mettant à 1 la variable wiki_crawl au début du script run.sh. Le corpus ainsi généré sera placé dans le dossier $corpus_path
+
+#### ETAPE 4
+
+Placer le(s) corpus textuel(s) que l'on souhaite utiliser pour l'entrainement du modèle de langage dans le dossier corpus_path et modifier le script run.sh afin d'assembler le corpus d'apprentissage du modèle de langage à partir des différentes sources. 
+
+```bash
 cat $corpus_path/corpus_part1.txt $corpus_path/corpus_part2.txt  > $corpus_path/CORPUS.txt
 ```
 
-Si vous souhaitez générer un corpus, vous pouvez en générer un en affectant 1 a la variable wiki_crawl au début du script Gene.sh. Cela permettra de récuperer 200 pages par pages de référence listées au debut du script scripts/wikipedia-crawler/wiki-crawler.py. Attention, cette opération est très longue.
+Si l'étape de récupération de données Wikipédia à été effectuée, penser à ajouter le fichier raw_database.txt qui se trouve dans le dossier $corpus_path dans la commande précédente.
 
-#### Etape 2
-Une fois le corpus textuel a la bonne place, il faut placer le modèle acoustique généré avec Kaldi (les fichiers final.mdl et tree) dans le dossier acoustic.
+#### Etape 5
+
+Placer le modèle acoustique à utiliser (les fichiers final.mdl et tree) dans le dossier $acoustic.
 
 
-#### Etape 3
-Une fois les deux premières étapes effectuées, il est possible de lancer la génération du graphe final : 
+#### Etape 6
+
+Lancer le script run.sh
+```bash
+./run.sh
 ```
-./Gene.sh
+
+Le graphe de transcription HCLG.fst généré se trouvera dans le dossier
+
+```bash
+$acoustic/graph
 ```
-#### Etape 4
-Une fois le script executé sans erreurs d'execution, il est possible de récupérer le graphe de transcription final (HCLG.fst) dans le dossier data/acoustic/graph afin de procéder à la transcription d'audios
 
 
 ### Fonctionnement Général
@@ -45,23 +67,23 @@ La génération du corpus d'apprentissage du modèle de langage selon le schéma
   <img src="../images/Schema_principe_generation_corpus.png" width="400" >
 </div>
 
-Un explorateur web va récupérer des pages wikipedia a partir de pages "racine" définies par l'utilisateur. Ces pages "racine" permettent d'orienter la recherche de textes vers des thèmes précis en fonction du contexte de la reconaissance de la parole. Cet explorateur récupère environs 200 pages par page "racine".
+Un explorateur web va récupérer des pages wikipedia a partir de pages "racine" définies par l'utilisateur au début du script `scripts/wikipedia-crawler/wiki-crawler.py`. Ces pages "racine" permettent d'orienter la recherche de textes vers des thèmes précis en fonction du contexte du discours à transcrire. Cet explorateur récupère 200 pages par page "racine".
 
 ATTENTION : La récupération des pages peut être très longue, il est recommandé de ne l'effectuer qu'une seule fois.
 
-Les pages Wikipédia récupérées sont ensuite associés avec des corpus existants (Commonvoice, ESTERS2...) avant d'être traitées avec un analyseur afin de supprimer les caractères spéciaux, adapter les abbréviations et mettre une seule phrase par ligne.
+Les pages Wikipédia récupérées sont ensuite associés avec des corpus existants (corpus ajoutés dans le dossier `$corpus_path`) avant d'être traitées avec un analyseur afin de supprimer les caractères spéciaux, adapter les abbréviations et mettre une seule phrase par ligne.
 
 Une fois ce prétraitement terminé, le corpus traité est divisé en un ensemble d'entrainement (80% des phrases) et un ensemble  de test (20% des phrases).
 
 ##### Adaptation au contexte
 
-Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus de développement (contenant un échantillon des textes que l'on doit transcrire) afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
+Afin d'obtenir une meilleure perplexité du modèle de langage, On utilise un corpus composé d'une partie des transcriptions des audios. On utilise ces textes afin d'adapter le contenu du corpus d'entrainement à ce que l'on doit transcrire. Cette adaptation est réalisée selon le schéma suivant :
 
 <div style="text-align:center">
   <img src="../images/Schema_de_principe_adaptation.png" width="900" >
 </div>
 
-Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams jusqu'aux 3-grams) ensuite on va "multiplier" le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement. Cela aura pour effet de diminuer la perplexité du modèle de langage.
+Cette étape correspond a une analyse du corpus de développement (on regarde le nombre d'occurence des différents n-grams) ensuite on va dupliquer le nombre d'occurences des n-grams apparaissant le moins dans le corpus d'entraînement. Cela aura pour effet de diminuer la perplexité du modèle de langage.
 
 #### Génération du graphe de reconaissance final
 
@@ -83,7 +105,7 @@ Cette fonction permet d'entrainer le modèle de langage ainsi que d'enregister t
 ##### Gestion des mots hors vocabulaires
 Nous disposons d'un dictionnaire phonetique. Il se peut que certains mots du corpus d'apprentissage ne soient pas présents dans ce dernier. Il va donc falloir générer leur phonétisation. Pour ce faire, on utilise un algorithme graphème to phonème (G2P) qui permet de génerer une phonetisation des mots.
 
-Afin de limiter les erreurs possibles de phonetisation, un filtrage des mots hors vocabulaire est nécessaire. En effet, des mots hors vocabulaire ne sont pas des mots de la langue française et ne sont donc pas nécessaires dans notre contexte de reconaissance. De plus, ils peuvent causer une creation de phonèmes inexistants par le modèle G2P lorsque ce dernier n'arrive pas à génerer un résultat correct. Dans un premier temps, on ne va donc conserver que les mots hors vocabulaire qui sont présent dans le corpus de développement.
+Afin de limiter les erreurs possibles de phonetisation, un filtrage des mots hors vocabulaire est nécessaire. En effet, des mots hors vocabulaire ne sont pas des mots de la langue française et ne sont donc pas nécessaires dans notre contexte de reconaissance. De plus, ils peuvent causer une creation de phonèmes inexistants par le modèle G2P lorsque ce dernier n'arrive pas à génerer un résultat correct. Dans un premier temps, on ne va donc conserver que les mots hors vocabulaire qui sont présent dans le corpus No kill.
 
 Avant de passer à l'étape suivante, il faut s'assurer que les phonèmes générés par l'algorithme G2P soient des phonèmes présent dans le dictionnaire.
 
