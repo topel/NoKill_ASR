@@ -15,7 +15,7 @@ Avant de lancer le script, veiller a bien specifier les chemins d'accès au debu
 * lang : chemin vers le repertoire pour la generation du modèle de langage
 * lang_test : chemin vers le repertoire pour le test du modèle de langage (doit etre différent de lang)
 * acoustic chemin vers le répertoire contenant le modèle acoustique
-* dev : chemin vers le fichier contenant le texte utilisé pou l'optimisation:
+* no_kill : chemin vers le fichier contenant le texte utilisé pou l'optimisation:
 
 Il faut s'assurer de placer le corpus textuel que l'on souhaite utiliser dans le dossier data/training_corpus/ et modifier le script Gene.sh a la ligne suivante afin de composer le corpus d'apprentissage du modèle de langage 
 ```
