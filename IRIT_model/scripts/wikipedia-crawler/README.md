@@ -2,13 +2,13 @@
 This is a program to crawl entire Wikipedia using breath-first method and extract information from all the pages.
 
 ## Summary
-This is a Python program to crawl wikipedia pages and extract relevant inforation from the pages. It crawls in breath-first fashion and stores all the links that it has to crawl thus slowly covering all of the wikipedia. The program can be edited to extract customized information according to one's choice. MySQLdb library is then used to write the information into a MySQL table for further use. 
+This is a Python program to crawl wikipedia pages and extract textual inforation from the pages. It crawls starting with specified pages in the begining of the script. For each specified page, the algorithm find ang get the information of 200 related pages.
 
 ## Compatability
-This program is written in Python 3.4 and can run on any version of Ptyhon (3.x). It is a download-and-run program with couple of changes according to user's requirements.
+This program is written in Python 2.7 and can run on any version of Python (2.x). It is a download-and-run program with couple of changes according to user's requirements.
 
 ## Status
-This is first stable version of the program which is ready-to-run, but still under development. Many more features will be added to it shortly.
+This is first stable version of the program which is ready-to-run, but still under development.
 
 ## Disclaimer
 This program lets you crawl the pages of wikipedia for information. It downloads then entire page of wikipedia that it is currently crawling. If this program is let to run for a long period of time, it can crawl the entire online database of wikipedia, which is highly discouraged!!!
