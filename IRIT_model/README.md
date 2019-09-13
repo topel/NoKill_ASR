@@ -1,6 +1,6 @@
 ## Modèle IRIT
 
-### Utilisation
+### Generation du graphe de transcription
 
 Le script run.sh permet de réaliser toute les opérations nécessaires à la création du graphe de reconaissance final : de la récupération du corpus wikipédia a l'assemblage des différents graphes. Avant de lancer ce script, plusieurs étapes sont nécessaires :
 
@@ -25,10 +25,15 @@ Spécifier les chemins d'accès vers les différents dossiers/fichiers au debut 
 * lang_test : chemin vers le repertoire pour le test du modèle de langage (doit etre différent de lang)
 * acoustic chemin vers le répertoire contenant le modèle acoustique
 * no_kill : chemin vers le fichier contenant le texte utilisé pou l'optimisation:
+* generic_lm : Chemin vers le modèle de langage a utiliser pour l'interpolation (format du modele : .gz)
 
 #### ETAPE 3
 
-Activer ou non l'étape de crawling wikipédia mettant à 1 la variable wiki_crawl au début du script run.sh. Le corpus ainsi généré sera placé dans le dossier $corpus_path
+Choisir les options d'entrainement en mettant a 1 ou a 0 les variables suivantes : 
+    - wiki_crawl : permet de crawler un corpus sur Wikipedia
+    - pretraitement : permet d'activer la mise en forme du corpus
+    - interpolation : permet d'effectuer l'interpolation du modele de langage genere avec le modele specifie dans la variable generic_lm.
+    - optimisation : permet d'effectuer l'optimisation de la perplexité par rapport au texte contenu dans la variable nokill
 
 #### ETAPE 4
 
@@ -52,10 +57,10 @@ Lancer le script run.sh
 ./run.sh
 ```
 
-Le graphe de transcription HCLG.fst généré se trouvera dans le dossier
+Le graphe de transcription HCLG.fst généré se trouvera dans le dossier :
 
 ```bash
-$acoustic/graph
+$export_dir/graph
 ```
 
 
