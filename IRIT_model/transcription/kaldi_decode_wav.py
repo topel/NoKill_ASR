@@ -36,7 +36,7 @@ from time           import time
 from optparse       import OptionParser
 from kaldiasr.nnet3 import KaldiNNet3OnlineModel, KaldiNNet3OnlineDecoder
 
-DEFAULT_MODELDIR    = '/home/pellegri/tools/ASR_DEMO_SAMOVA/DEMO_MEETUP/model'
+DEFAULT_MODELDIR    = <path_to_the_model_directory>
 
 parser = OptionParser("usage: %prog [options] foo.wav [bar.wav ...]")
 
