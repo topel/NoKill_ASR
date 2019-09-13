@@ -26,6 +26,7 @@ Spécifier les chemins d'accès vers les différents dossiers/fichiers au debut 
 * acoustic chemin vers le répertoire contenant le modèle acoustique
 * no_kill : chemin vers le fichier contenant le texte utilisé pou l'optimisation:
 * generic_lm : Chemin vers le modèle de langage a utiliser pour l'interpolation (format du modele : .gz)
+* export_dir : Chemin vers le répertoire qui contiendra le graphe de reconaissance.
 
 #### ETAPE 3
 
