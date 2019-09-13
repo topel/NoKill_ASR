@@ -15,6 +15,8 @@ python file_kaldi_decode_live.py <yourfile.wav>
 python kaldi_decode_live.py
 ```
 
+*Attention* : Lorsque des fichiers audios sont utilisés, la fréquence d'échantillonage de ces derniers doit être 16kHz
+
 ## Prérequis
 
 Avant de commencer la transcription :
