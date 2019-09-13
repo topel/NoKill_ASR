@@ -43,7 +43,7 @@ DEFAULT_AGGRESSIVENESS           = 3
 # DEFAULT_MODEL_DIR                = '/opt/kaldi/model/kaldi-generic-de-tdnn_250'
 #DEFAULT_MODEL_DIR                = '/opt/kaldi/model/kaldi-generic-en-tdnn_250'
 
-DEFAULT_MODEL_DIR                = '/home/pellegri/tools/ASR_DEMO_SAMOVA/DEMO_MEETUP/model'
+DEFAULT_MODEL_DIR                = <path_to_the_model_directory>
 DEFAULT_ACOUSTIC_SCALE           = 1.0
 DEFAULT_BEAM                     = 15.0
 DEFAULT_FRAME_SUBSAMPLING_FACTOR = 3
