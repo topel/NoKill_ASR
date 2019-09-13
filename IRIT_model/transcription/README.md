@@ -18,7 +18,7 @@ python kaldi_decode_live.py
 ## Prérequis
 
 Avant de commencer la transcription :
-* copier le dossier graph généré précédamment dans le dossier `model/model`. Plusieurs dossiers contenant des graphes peuvent être placés dans ce dossier. Le graphe que l'on souhaite utiliser doit être dans le dossier nomé graph 
+* copier le dossier graph généré précédemment dans le dossier `model/model`. Plusieurs dossiers contenant des graphes peuvent être placés dans ce dossier. Le graphe que l'on souhaite utiliser doit être dans le dossier nommé graph 
 * Modifier dans les scripts le chemin d'accès vers le modèle :
 ```python
 DEFAULT_MODEL_DIR = <path_to_the_model_directory>
