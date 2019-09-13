@@ -11,6 +11,7 @@ Le dossier **IRIT_model** regroupe les scripts python, bash et perl permettant d
 * Créer un corpus textuel basé sur du contenu Wikipédia
 * Entrainer un modèle de langage à partir de différents corpus textuels
 * Générer un graphe de transcription en utilisant kaldi
+* Effectuer la reconnaissance automatique de la parole en utilisant le graphe généré
 
 
 ## Prérequis
