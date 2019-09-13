@@ -5,12 +5,12 @@ Ce répertoire contient les scripts nécessaires à la reconaissance de parole e
 python kaldi_decode_wav.py <yourfile.wav>
 ```
 
-* *file_kaldi_decode_live.py* : permet d'effectuer la reconaissance a partir d'un fichier wav en simulant du streaming
+* *file_kaldi_decode_live.py* : permet d'effectuer la reconaissance a partir d'un fichier wav en simulant du streaming :
 ```bash
 python file_kaldi_decode_live.py <yourfile.wav>
 ```
 
-* *kaldi_decode_live.py* : permet d'effectuer la reconaissance en utilisant l'audio du micro
+* *kaldi_decode_live.py* : permet d'effectuer la reconaissance en utilisant l'audio du micro :
 ```bash
 python kaldi_decode_live.py
 ```
