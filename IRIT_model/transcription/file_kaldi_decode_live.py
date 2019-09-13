@@ -162,5 +162,6 @@ for samples in chunks:
         print "New Utterance\n"
         vad = VAD(aggressiveness=aggressiveness)
 
+print '\n \n \n'
 print user_utt
 
